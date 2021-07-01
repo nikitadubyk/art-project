@@ -18,7 +18,7 @@ const showMoreStyles = (trigger, wrapper) => {
 
 
     btn.addEventListener('click', function() {
-        getResource('assets/db.jso')
+        getResource('assets/db.json')
         .then(res => {
             createCards(res.styles);
         })
