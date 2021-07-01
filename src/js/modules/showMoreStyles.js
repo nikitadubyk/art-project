@@ -18,11 +18,20 @@ const showMoreStyles = (trigger, wrapper) => {
 
 
     btn.addEventListener('click', function() {
-        getResource('assets/db.json')
+        getResource('assets/db.jso')
         .then(res => {
             createCards(res.styles);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+
+            const message = document.createElement('div');
+            message.classList.add('animated', 'fadeInUp');
+            message.style.fontSize = '24px';
+            message.style.textAlign = 'center';
+            message.textContent = 'Упс, произошла ошибка';
+            document.querySelector('#styles .row').appendChild(message);
+        });
 
         this.remove();
     });
