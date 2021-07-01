@@ -30,7 +30,7 @@ const showMoreStyles = (trigger, wrapper) => {
             message.style.fontSize = '24px';
             message.style.textAlign = 'center';
             message.textContent = 'Упс, произошла ошибка';
-            document.querySelector('#styles .row').appendChild(message);
+            document.querySelector(wrapper).appendChild(message);
         });
 
         this.remove();
