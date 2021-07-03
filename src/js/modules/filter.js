@@ -27,8 +27,14 @@ const filter = () => {
     };
 
     menu.addEventListener('click', (e) => {
+        let target = e.target;
         let className = e.target.classList[0];
         let allElem;
+
+        if (target && target.tagName == 'LI') {
+            items.forEach(elem => elem.classList.remove('active'));
+            target.classList.add('active');
+        }
 
         if (className === 'grandmother' || className === 'granddad') {
             allElem = '';
@@ -37,15 +43,6 @@ const filter = () => {
         }
          
         typeFilter(allElem);
-    });
-
-    menu.addEventListener('click', (e) => {
-        let target = e.target;
-
-        if (target && target.tagName == 'LI') {
-            items.forEach(elem => elem.classList.remove('active'));
-            target.classList.add('active');
-        }
     });
 };
 
