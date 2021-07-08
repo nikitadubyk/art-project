@@ -11,40 +11,55 @@ const scrolling = (upSelector) => {
         }
     });
 
-    // Scrolling with raf
-
-    let links = document.querySelectorAll('[href^="#"]'),
-        speed = 0.3;
+    const links = document.querySelectorAll('a[href^="#"]');
 
     links.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
 
-            let widthTop = document.documentElement.scrollTop,
-                hash = this.hash,
-                toBlock = document.querySelector(hash).getBoundingClientRect().top,
-                start = null;
+            const id = link.getAttribute('href');
 
-            requestAnimationFrame(step);
-
-            function step(time) {
-                if (start === null) {
-                    start = time;
-                }
-
-                let progress = time - start,
-                    r = (toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock));
-
-                document.documentElement.scrollTo(0, r);
-
-                if (r != widthTop + toBlock) {
-                    requestAnimationFrame(step);
-                } else {
-                    location.hash = hash;
-                }
-            }
+            document.querySelector(id).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         });
     });
+
+    // Scrolling with raf
+
+    // let links = document.querySelectorAll('[href^="#"]'),
+    //     speed = 0.3;
+
+    // links.forEach(link => {
+    //     link.addEventListener('click', function(e) {
+    //         e.preventDefault();
+
+    //         let widthTop = document.documentElement.scrollTop,
+    //             hash = this.hash,
+    //             toBlock = document.querySelector(hash).getBoundingClientRect().top,
+    //             start = null;
+
+    //         requestAnimationFrame(step);
+
+    //         function step(time) {
+    //             if (start === null) {
+    //                 start = time;
+    //             }
+
+    //             let progress = time - start,
+    //                 r = (toBlock < 0 ? Math.max(widthTop - progress / speed, widthTop + toBlock) : Math.min(widthTop + progress / speed, widthTop + toBlock));
+
+    //             document.documentElement.scrollTo(0, r);
+
+    //             if (r != widthTop + toBlock) {
+    //                 requestAnimationFrame(step);
+    //             } else {
+    //                 location.hash = hash;
+    //             }
+    //         }
+    //     });
+    // });
 
     // Pure js scrolling 
 
